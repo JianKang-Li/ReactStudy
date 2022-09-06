@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+  <script src="../js/react.development.js"></script>
+  <script src="../js/react-dom.development.js"></script>
+  <script src="../js/babel.min.js"></script>
+  <title></title>
+</head>
+
+<body>
+
+  <div id="test"></div>
+
+
+  <script type="text/babel">
+    class Weather extends React.Component {
+      // 构造器调用几次  执行一次
+      constructor(props) {
+        console.log(1);
+        super(props)
+        // 初始化状态
+        this.state = {
+          isHot: true,
+          wind: "微风"
+        }
+        // 解决this丢失
+        this.changeWeather = this.changeWeather.bind(this)
+      }
+      // render调用1+n次，初始化时调用一次，n为状态更新次数
+      render() {
+        //读取状态
+        const { isHot, wind } = this.state
+        return <h1 id="title" onClick={this.changeWeather}>今天天气很{isHot ? "炎热" : "寒冷"}，{wind}</h1>
+      }
+      // changeWeather点几次调用几次
+      changeWeather() {
+        // console.log("click")
+        // 由于changeWeather作为onClick的回调，所以不是通过实例调用，而是直接调用
+        // 类中方法默认开启严格模式，所以this为undefined
+        // console.log(this)
+        const isHot = this.state.isHot
+        // 状态不能直接更改，不能像下面一样
+        // this.state.isHot=!isHot
+        // 状态通过setState更改,且更新是一种合并不是直接替换
+        this.setState({ isHot: !isHot })
+      }
+    }
+
+    ReactDOM.render(<Weather />, document.querySelector("#test"))
+    const title = document.querySelector("#title")
+    /* title.addEventListener('click', () => {
+      console.log('标题被点击了')
+    }) */
+  </script>
+</body>
+
+</html>

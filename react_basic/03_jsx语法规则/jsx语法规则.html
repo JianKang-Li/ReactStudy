@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../js/react.development.js"></script>
+  <script src="../js/react-dom.development.js"></script>
+  <script src="../js/babel.min.js"></script>
+  <title>1_jsx创建</title>
+  <style>
+    .title {
+      background-color: orange;
+      width: 200px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="test"></div>
+
+
+  <script type="text/babel">
+    /*
+    此处一定要写babel表示使用babel进行转换
+    */
+    //  创建虚拟dom
+    const myId = 'aTgUiGu'
+    const myData = "hello,react"
+    const VDOM = (
+      <div>
+        <h2 id={myId.toLowerCase()} className="title">
+          <span style={{ color: 'white' }}>{myData}</span>
+        </h2>
+      </div>)
+    /* 
+    jsx语法规则
+      1. 定义虚拟DOM时，不要写引号
+      2. 标签中混入JS表达式时使用{}
+      3. 样式类名使用className
+      4. 内联样式要用style={{key:'value'}}
+      5. 虚拟DOM只有一个根标签
+      6. 标签必须闭合
+      7. 标签首字母
+        + 若小写开头，则将标签转为html同名元素，若html中没有该标签则报错
+        + 若为大写开头，React去渲染对应组件，若未定义则报错
+    */
+    // 渲染DOM
+    ReactDOM.render(VDOM, document.querySelector("#test"))
+
+  </script>
+</body>
+
+</html>

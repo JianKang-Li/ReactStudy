@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+  <script src="../js/react.development.js"></script>
+  <script src="../js/react-dom.development.js"></script>
+  <script src="../js/babel.min.js"></script>
+  <title>函数式组件</title>
+</head>
+
+<body>
+
+  <div id="test"></div>
+
+
+  <script type="text/babel">
+    // 创建函数式组件
+    function MyComponent() {
+      // console.log(this)//此处的this是undefined，babel编译后开启了严格模式
+      return <h2>我是函数定义的组件(适用于【简单组件】的定义)</h2>
+    }
+
+    ReactDOM.render(<MyComponent />, document.querySelector("#test"))
+  /*
+      执行了ReactDOM.render(<MyComponent />...之后
+      + React解析组件标签，找到MyComponent组件
+      + 发现组件时使用函数定义的，随后调用该幻术，将返回的虚拟DOM转为真实DOM，随后呈现在页面中
+      
+      */
+
+  </script>
+</body>
+
+</html>

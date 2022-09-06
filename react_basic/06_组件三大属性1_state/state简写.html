@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+  <script src="../js/react.development.js"></script>
+  <script src="../js/react-dom.development.js"></script>
+  <script src="../js/babel.min.js"></script>
+  <title></title>
+</head>
+
+<body>
+
+  <div id="test"></div>
+
+
+  <script type="text/babel">
+    class Weather extends React.Component {
+      // 初始化状态
+      state = {
+        isHot: true,
+        wind: "微风"
+      }
+
+      render() {
+        const { isHot, wind } = this.state
+        return <h1 id="title" onClick={this.changeWeather}>今天天气很{isHot ? "炎热" : "寒冷"}，{wind}</h1>
+      }
+
+      // 利用箭头函数的this在定义时就固定绑定this
+      changeWeather = () => {
+        const isHot = this.state.isHot
+        this.setState({ isHot: !isHot })
+      }
+    }
+
+    ReactDOM.render(<Weather />, document.querySelector("#test"))
+  </script>
+</body>
+
+</html>
