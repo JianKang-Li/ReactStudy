@@ -9,6 +9,7 @@
   <script src="../js/react.development.js" defer></script>
   <script src="../js/react-dom.development.js" defer></script>
   <script src="../js/babel.min.js" defer></script>
+  <script src="../js/prop-types.js" defer></script>
   <title></title>
 </head>
 
@@ -19,6 +20,12 @@
 
   <script type="text/babel">
     class Person extends React.Component {
+      constructor(props) {
+        // 构造器是否接受props，是否传递给super取决于是否希望在构造器通过this访问props
+        console.log(props)
+        super(props)
+      }
+
       render() {
         const { name, age, sex } = this.props
         return (<ul>
@@ -27,10 +34,27 @@
           <li>年龄：{age + 1}</li>
         </ul>)
       }
+
+      static propTypes = {
+        name: PropTypes.string.isRequired,
+        sex: PropTypes.string,
+      }
+
+      static defaultProps = {
+        sex: "男",
+        age: 18
+      }
+
     }
 
-    const p = { name: "老牛", age: 18, sex: "男" }
+    // 渲染
+    const p = {
+      name: "老牛"
+    }
     ReactDOM.render(<Person {...p} />, document.querySelector("#test"))
+
+
+
   </script>
 </body>
 

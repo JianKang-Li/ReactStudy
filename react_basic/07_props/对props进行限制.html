@@ -9,6 +9,7 @@
   <script src="../js/react.development.js" defer></script>
   <script src="../js/react-dom.development.js" defer></script>
   <script src="../js/babel.min.js" defer></script>
+  <script src="../js/prop-types.js" defer></script>
   <title></title>
 </head>
 
@@ -29,8 +30,28 @@
       }
     }
 
-    const p = { name: "老牛", age: 18, sex: "男" }
+    // props 是只读的
+    //对标签属性值进行类型、必要性的限制
+    Person.propTypes = {
+      name: PropTypes.string.isRequired,
+      sex: PropTypes.string,
+      speak: PropTypes.func
+    }
+
+    Person.defaultProps = {
+      sex: "男",
+      age: 18
+    }
+
+    const p = {
+      name: "老牛", age: 18, sex: "男", speak
+    }
     ReactDOM.render(<Person {...p} />, document.querySelector("#test"))
+
+    function speak() {
+      console.log("我")
+    }
+
   </script>
 </body>
 

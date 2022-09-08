@@ -9,6 +9,7 @@
   <script src="../js/react.development.js" defer></script>
   <script src="../js/react-dom.development.js" defer></script>
   <script src="../js/babel.min.js" defer></script>
+  <script src="../js/prop-types.js" defer></script>
   <title></title>
 </head>
 
@@ -18,18 +19,32 @@
 
 
   <script type="text/babel">
-    class Person extends React.Component {
-      render() {
-        const { name, age, sex } = this.props
-        return (<ul>
-          <li>姓名：{name}</li>
-          <li>性别：{sex}</li>
-          <li>年龄：{age + 1}</li>
-        </ul>)
-      }
+    function Person(props) {
+      const { name, sex, age } = props
+      return (<ul>
+        <li>姓名：{name}</li>
+        <li>性别：{sex}</li>
+        <li>年龄：{age + 1}</li>
+      </ul>)
+    }
+    // 渲染
+    const p = {
+      name: "老牛",
+      age: 11,
+      sex: "男"
     }
 
-    const p = { name: "老牛", age: 18, sex: "男" }
+
+    Person.propTypes = {
+      name: PropTypes.string.isRequired,
+      sex: PropTypes.string,
+      age: PropTypes.number
+    }
+
+    Person.defaultProps = {
+      sex: "男",
+      age: 18
+    }
     ReactDOM.render(<Person {...p} />, document.querySelector("#test"))
   </script>
 </body>
