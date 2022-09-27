@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+  <script src="../js/react.development.js" defer></script>
+  <script src="../js/react-dom.development.js" defer></script>
+  <script src="../js/babel.min.js" defer></script>
+  <script src="../js/prop-types.js" defer></script>
+  <title>回调函数形式ref</title>
+</head>
+
+<body>
+
+  <div id="test"></div>
+
+
+  <script type="text/babel">
+    class Demo extends React.Component {
+      state = {
+        isHot: true
+      }
+      // 展示左侧输入框的值
+      showInfo = () => {
+        // console.log(this);
+        alert(this['input1'].value);
+      }
+
+      changeWeather = () => {
+        const { isHot } = this.state
+        this.setState({ isHot: !isHot })
+      }
+
+      saveInput = (c) => {
+        this.input1 = c;
+        console.log('@', c);
+      }
+
+      render() {
+        const { isHot } = this.state
+        return (
+          <div>
+            <h2>今天天气很{isHot ? '炎热' : "凉爽"}</h2>
+            {/* <input type="text" ref={(c) => { this.input1 = c; console.log('@', c); }} placeholder='点击提示数据' /><br /><br />*/}
+            <input type="text" ref={this.saveInput} placeholder='点击提示数据' /><br /><br />
+            <button onClick={this.changeWeather}>切换天气</button>
+            <button onClick={this.showInfo}>点我提示左侧数据</button>&nbsp;
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(<Demo />, document.querySelector("#test"))
+  </script>
+</body>
+
+</html>

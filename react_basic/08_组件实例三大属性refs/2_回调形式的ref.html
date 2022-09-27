@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+  <script src="../js/react.development.js" defer></script>
+  <script src="../js/react-dom.development.js" defer></script>
+  <script src="../js/babel.min.js" defer></script>
+  <script src="../js/prop-types.js" defer></script>
+  <title>回调函数形式ref</title>
+</head>
+
+<body>
+
+  <div id="test"></div>
+
+
+  <script type="text/babel">
+    class Demo extends React.Component {
+      // 展示左侧输入框的值
+      showData = () => {
+        // console.log(this);
+        alert(this['input1'].value);
+      }
+
+      showData2 = () => {
+        alert(this['input2'].value)
+      }
+      render() {
+        return (
+          <div>
+            <input type="text" ref={(c) => this.input1 = c} placeholder='点击提示数据' />&nbsp;
+            <button onClick={this.showData}>点我提示左侧数据</button>&nbsp;
+            <input type="text" ref={(c) => this.input2 = c} placeholder='失焦提示数据' onBlur={this.showData2} />&nbsp;
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(<Demo a='1' b='2' />, document.querySelector("#test"))
+  </script>
+</body>
+
+</html>
