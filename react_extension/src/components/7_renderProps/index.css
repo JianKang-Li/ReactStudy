@@ -1,0 +1,15 @@
+.parent {
+  border: 1px solid red;
+  padding: 1rem;
+}
+
+.a {
+  border: 1px solid black;
+  margin-top: 1rem;
+  padding: 1rem;
+}
+
+.b {
+  border: 1px solid orange;
+  margin-top: 1rem;
+}
